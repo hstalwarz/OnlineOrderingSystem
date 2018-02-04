@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds" >
+
+
+	<property name="springAppName" value="captaingrub-restaurant-service"/>
+	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%d{dd MMM yyyy ;HH:mm:ss.SSS} %highlight(%level) [%thread] %property{HOSTNAME} ${springAppName:-} [%X{X-B3-TraceId}] 
+				%logger{0}.%M\(%line\) - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+	<appender name="fileAppender"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>application.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>application_%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+			<maxFileSize>10MB</maxFileSize> 
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{dd MMM yyyy ;HH:mm:ss.SSS} %level [%thread] %property{HOSTNAME} ${springAppName:-} [%X{X-B3-TraceId}]
+				%logger{0}.%M\(%line\) - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<root level="ERROR">
+		<appender-ref ref="consoleAppender" />
+		<appender-ref ref="fileAppender" />
+	</root>
+
+	<logger name="com.captaingrub.restaurant">
+		<level value="DEBUG" />
+	</logger>
+</configuration>

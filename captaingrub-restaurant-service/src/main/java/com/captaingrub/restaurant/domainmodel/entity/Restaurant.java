@@ -1,11 +1,22 @@
 package com.captaingrub.restaurant.domainmodel.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.captaingrub.restaurant.constants.RestaurantCategoryEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * The Class Restaurant.
@@ -16,7 +27,7 @@ public class Restaurant {
 	
 	/** The id. */
 	@Id
-	@Column(name = "ID")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
@@ -38,7 +49,16 @@ public class Restaurant {
 	
 	/** The category. */
 	@Column(name = "category")
-	private String category;
+	@Enumerated(EnumType.STRING)
+	private RestaurantCategoryEnum category;
+	
+	/** The postal code. */
+	@Column(name = "postal_code")
+	private Integer postalCode;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "restaurant")
+	@JsonIgnore
+    private Set<Menu> restaurantMenus = new HashSet<>();
 
 	/**
 	 * Gets the id.
@@ -136,7 +156,7 @@ public class Restaurant {
 	 * @return the category
 	 */
 	public String getCategory() {
-		return category;
+		return category.getResponseCategory();
 	}
 
 	/**
@@ -144,9 +164,44 @@ public class Restaurant {
 	 *
 	 * @param category the new category
 	 */
-	public void setCategory(String category) {
+	public void setCategory(RestaurantCategoryEnum category) {
 		this.category = category;
 	}
-	
+
+	/**
+	 * Gets the postal code.
+	 *
+	 * @return the postal code
+	 */
+	public Integer getPostalCode() {
+		return postalCode;
+	}
+
+	/**
+	 * Sets the postal code.
+	 *
+	 * @param postalCode the new postal code
+	 */
+	public void setPostalCode(Integer postalCode) {
+		this.postalCode = postalCode;
+	}
+
+	/**
+	 * Gets the restaurant menus.
+	 *
+	 * @return the restaurant menus
+	 */
+	public Set<Menu> getRestaurantMenus() {
+		return restaurantMenus;
+	}
+
+	/**
+	 * Sets the restaurant menus.
+	 *
+	 * @param restaurantMenus the new restaurant menus
+	 */
+	public void setRestaurantMenus(Set<Menu> restaurantMenus) {
+		this.restaurantMenus = restaurantMenus;
+	}
 	
 }

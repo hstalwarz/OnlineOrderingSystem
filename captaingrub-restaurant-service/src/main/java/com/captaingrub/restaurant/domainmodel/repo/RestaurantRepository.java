@@ -1,5 +1,7 @@
 package com.captaingrub.restaurant.domainmodel.repo;
 
+import java.util.Set;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,5 +13,6 @@ import com.captaingrub.restaurant.domainmodel.entity.Restaurant;
 @Repository
 public interface RestaurantRepository extends CrudRepository<Restaurant, Long> {
 
+	Set<Restaurant> findAllByPostalCode(Integer postalCode);
 
 }
