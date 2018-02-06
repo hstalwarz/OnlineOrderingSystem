@@ -1,5 +1,6 @@
 package com.captaingrub.restaurant.api;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -7,10 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.captaingrub.restaurant.domainmodel.businessobject.MenuDTO;
+import com.captaingrub.restaurant.domainmodel.businessobject.MenuItemDTO;
+import com.captaingrub.restaurant.domainmodel.businessobject.RestaurantDTO;
 import com.captaingrub.restaurant.domainmodel.entity.Menu;
 import com.captaingrub.restaurant.domainmodel.entity.MenuItem;
 import com.captaingrub.restaurant.domainmodel.entity.Restaurant;
@@ -50,6 +55,30 @@ public class RestaurantController {
 	}
 	
 	/**
+	 * Adds the restaurants.
+	 *
+	 * @param newRestaurants the new restaurants
+	 * @return the response entity
+	 */
+	@RequestMapping(method = RequestMethod.POST, value = "/restaurant")
+	public ResponseEntity<Void> addRestaurants(@RequestBody final List<RestaurantDTO> newRestaurants) {
+		this.restaurantService.addRestaurants(newRestaurants);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	/**
+	 * Delete restaurant.
+	 *
+	 * @param restaurantId the restaurant id
+	 * @return the response entity
+	 */
+	@RequestMapping(method = RequestMethod.DELETE, value = "/restaurant/{restaurantId}")
+	public ResponseEntity<Void> deleteRestaurant(@PathVariable("restaurantId") final Long restaurantId) {
+		this.restaurantService.deleteRestaurant(restaurantId);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	/**
 	 * Gets the menu by restaurant id.
 	 *
 	 * @param restaurantId the restaurant id
@@ -65,13 +94,41 @@ public class RestaurantController {
 	}
 	
 	/**
+	 * Adds the menus.
+	 *
+	 * @param restaurantId the restaurant id
+	 * @param newMenus the new menus
+	 * @return the response entity
+	 */
+	@RequestMapping(method = RequestMethod.POST, value = "/restaurant/{restaurantId}/menu")
+	public ResponseEntity<Void> addMenus(@PathVariable("restaurantId") final Long restaurantId,
+			@RequestBody final List<MenuDTO> newMenus) {
+		this.restaurantService.addMenus(restaurantId, newMenus);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	/**
+	 * Delete menu.
+	 *
+	 * @param restaurantId the restaurant id
+	 * @param menuId the menu id
+	 * @return the response entity
+	 */
+	@RequestMapping(method = RequestMethod.DELETE, value = "/restaurant/{restaurantId}/menu/{menuId}")
+	public ResponseEntity<Void> deleteMenu(@PathVariable("restaurantId") final Long restaurantId,
+			@PathVariable("menuId") final Long menuId) {
+		this.restaurantService.deleteMenu(restaurantId, menuId);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	/**
 	 * Gets the menu item.
 	 *
 	 * @param menuId the menu id
 	 * @param menuItemId the menu item id
 	 * @return the menu item
 	 */
-	@RequestMapping(method = RequestMethod.GET, value={"/menu/{menuId}/item/{menuItemId}", 
+	@RequestMapping(method = RequestMethod.GET, value = {"/menu/{menuId}/item/{menuItemId}", 
 			"/menu/{menuId}"})
 	public ResponseEntity<Set<MenuItem>> getMenuItem(@PathVariable("menuId") final Long menuId, 
 			@PathVariable Optional<Long> menuItemId) {
@@ -79,5 +136,36 @@ public class RestaurantController {
 		HttpStatus.OK);
 	}
 	
+	/**
+	 * Adds the menu items.
+	 *
+	 * @param restaurantId the restaurant id
+	 * @param menuId the menu id
+	 * @param newMenuItems the new menu items
+	 * @return the response entity
+	 */
+	@RequestMapping(method = RequestMethod.POST, value = "/restaurant/{restaurantId}/menu/{menuId}/menuItem")
+	public ResponseEntity<Void> addMenuItems(@PathVariable("restaurantId") final Long restaurantId,
+			@PathVariable("menuId") final Long menuId,
+			@RequestBody final List<MenuItemDTO> newMenuItems) {
+		this.restaurantService.addMenuItems(restaurantId, menuId, newMenuItems);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	/**
+	 * Delete menu item.
+	 *
+	 * @param restaurantId the restaurant id
+	 * @param menuId the menu id
+	 * @param menuItemId the menu item id
+	 * @return the response entity
+	 */
+	@RequestMapping(method = RequestMethod.DELETE, value = "/restaurant/{restaurantId}/menu/{menuId}"
+			+ "/menuItem/{menuItemId}")
+	public ResponseEntity<Void> deleteMenuItem(@PathVariable("restaurantId") final Long restaurantId,
+			@PathVariable("menuId") final Long menuId, @PathVariable("menuItemId") final Long menuItemId) {
+		this.restaurantService.deleteMenuItem(restaurantId, menuId, menuItemId);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 	
 }

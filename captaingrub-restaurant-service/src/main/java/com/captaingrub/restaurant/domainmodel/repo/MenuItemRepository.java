@@ -30,5 +30,13 @@ public interface MenuItemRepository extends CrudRepository<MenuItem, Long> {
 	 */
 	MenuItem findByMenuIdAndId(Long menuId, Long id);
 
+	/**
+	 * Delete by menu id and id.
+	 *
+	 * @param menuId the menu id
+	 * @param menuItemId the menu item id
+	 */
+	void deleteByMenuIdAndId(Long menuId, Long menuItemId);
+
 
 }

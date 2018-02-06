@@ -1,82 +1,33 @@
-package com.captaingrub.restaurant.domainmodel.entity;
+package com.captaingrub.restaurant.domainmodel.businessobject;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 import com.captaingrub.restaurant.constants.RestaurantCategoryEnum;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
- * The Class Restaurant.
+ * The Class RestaurantDTO.
  */
-@Entity
-@Table(name = "restaurant")
-public class Restaurant {
-	
-	/** The id. */
-	@Id
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+public class RestaurantDTO {
 	
 	/** The name. */
-	@Column(name = "name")
 	private String name;
 	
 	/** The address. */
-	@Column(name = "address")
 	private String address;
 	
 	/** The phone. */
-	@Column(name = "phone")
 	private String phone;
 	
 	/** The average rating. */
-	@Column(name = "average_rating")
 	private Double averageRating;
 	
 	/** The category. */
-	@Column(name = "category")
-	@Enumerated(EnumType.STRING)
 	private RestaurantCategoryEnum category;
 	
 	/** The postal code. */
-	@Column(name = "postal_code")
 	private Integer postalCode;
-	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "restaurant")
-	@JsonIgnore
-    private Set<Menu> restaurantMenus = new HashSet<>();
-
-	/**
-	 * Gets the id.
-	 *
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
-
-	/**
-	 * Sets the id.
-	 *
-	 * @param id the new id
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	/**
 	 * Gets the name.
@@ -155,8 +106,8 @@ public class Restaurant {
 	 *
 	 * @return the category
 	 */
-	public String getCategory() {
-		return category.getResponseCategory();
+	public RestaurantCategoryEnum getCategory() {
+		return category;
 	}
 
 	/**
@@ -184,24 +135,6 @@ public class Restaurant {
 	 */
 	public void setPostalCode(Integer postalCode) {
 		this.postalCode = postalCode;
-	}
-
-	/**
-	 * Gets the restaurant menus.
-	 *
-	 * @return the restaurant menus
-	 */
-	public Set<Menu> getRestaurantMenus() {
-		return restaurantMenus;
-	}
-
-	/**
-	 * Sets the restaurant menus.
-	 *
-	 * @param restaurantMenus the new restaurant menus
-	 */
-	public void setRestaurantMenus(Set<Menu> restaurantMenus) {
-		this.restaurantMenus = restaurantMenus;
 	}
 	
 }
