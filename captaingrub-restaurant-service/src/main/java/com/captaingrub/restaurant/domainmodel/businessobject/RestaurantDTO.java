@@ -1,8 +1,7 @@
 package com.captaingrub.restaurant.domainmodel.businessobject;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import com.captaingrub.restaurant.constants.RestaurantCategoryEnum;
 
@@ -28,6 +27,34 @@ public class RestaurantDTO {
 	
 	/** The postal code. */
 	private Integer postalCode;
+
+	/**
+	 * Instantiates a new restaurant DTO.
+	 */
+	public RestaurantDTO() {
+		super();
+	}
+
+	/**
+	 * Instantiates a new restaurant DTO.
+	 *
+	 * @param name the name
+	 * @param address the address
+	 * @param phone the phone
+	 * @param averageRating the average rating
+	 * @param category the category
+	 * @param postalCode the postal code
+	 */
+	public RestaurantDTO(String name, String address, String phone, Double averageRating,
+			RestaurantCategoryEnum category, Integer postalCode) {
+		super();
+		this.name = name;
+		this.address = address;
+		this.phone = phone;
+		this.averageRating = averageRating;
+		this.category = category;
+		this.postalCode = postalCode;
+	}
 
 	/**
 	 * Gets the name.
@@ -136,5 +163,30 @@ public class RestaurantDTO {
 	public void setPostalCode(Integer postalCode) {
 		this.postalCode = postalCode;
 	}
+	
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder(17, 31).append(this.name).append(this.phone)
+				.append(this.category).append(this.address).append(this.averageRating)
+				.append(this.postalCode).toHashCode();
+	}
+	
+	@Override
+	public boolean equals(final Object obj) {
+		boolean isEqual = false;
+		if (this == obj) {
+			isEqual = true;
+		} else if (obj != null && this.getClass() == obj.getClass()) {
+			RestaurantDTO dto = (RestaurantDTO) obj;
+			isEqual = new EqualsBuilder().append(this.getAddress(), dto.getAddress())
+					.append(this.getAverageRating(), dto.getAverageRating())
+					.append(this.getCategory(), dto.getCategory())
+					.append(this.getName(), dto.getName())
+					.append(this.getPhone(), dto.getPhone())
+					.append(this.getPostalCode(), dto.getPostalCode()).isEquals();
+		}
+		return isEqual;
+	}
+
 	
 }

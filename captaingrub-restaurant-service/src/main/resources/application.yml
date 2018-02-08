@@ -3,3 +3,6 @@ spring:
     url: jdbc:mysql://localhost:3306/online_ordering_system?useSSL=false
     username: root
     password: 
+    
+server:
+  context-path: /captaingrub
