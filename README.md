@@ -37,7 +37,7 @@ The code supports GET, POST and DELETE operations on each of these
 1. To view the different API contract details, navigate to http://localhost:8080/captaingrub/v2/api-docs (it is recommended to have a JSON Viewer extension in your browser). Alternatively, the contracts can be seen on the Swagger online editor as well: https://editor.swagger.io/ by pasting the contents from the api-docs URL or the contents of the swagger.yml file present at `/captaingrub-restaurant-service/src/main/resources/swagger.yml`.
 1. Logs can be viewed in files in the `/captaingrub-restaurant-service/` directory with filenamne `application.log` or filename pattern `application_{yyyy-MM-dd}_.log` for archived logs
 
-### Future Improvements
+### Future Improvements:
 * Create an Exception Handling framework, using custom classes for Business and Technical Exceptions, and an Exception Controller Advice that handles various exceptions and returns a consistent error JSON response from the API.
 * Add Validators for the POST end points
 * Introduce a caching layer using Hazelcast, to optimize reads for frequently fetched data
