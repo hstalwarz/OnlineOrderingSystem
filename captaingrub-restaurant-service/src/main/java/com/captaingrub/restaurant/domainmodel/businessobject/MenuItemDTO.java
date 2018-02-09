@@ -1,7 +1,7 @@
 package com.captaingrub.restaurant.domainmodel.businessobject;
 
 /**
- * The Class MenuItem.
+ * The Class MenuItem captures the details of a Menu Item.
  */
 public class MenuItemDTO {
 	
@@ -13,9 +13,6 @@ public class MenuItemDTO {
 	
 	/** The price. */
 	private Double price;
-	
-	/** The menu. */
-	private MenuDTO menu;
 
 	/**
 	 * Gets the name.
@@ -71,21 +68,4 @@ public class MenuItemDTO {
 		this.price = price;
 	}
 
-	/**
-	 * Gets the menu.
-	 *
-	 * @return the menu
-	 */
-	public MenuDTO getMenu() {
-		return menu;
-	}
-
-	/**
-	 * Sets the menu.
-	 *
-	 * @param menu the new menu
-	 */
-	public void setMenu(MenuDTO menu) {
-		this.menu = menu;
-	}
 }

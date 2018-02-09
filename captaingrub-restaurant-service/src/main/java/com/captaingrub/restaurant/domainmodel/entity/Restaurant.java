@@ -19,7 +19,7 @@ import com.captaingrub.restaurant.constants.RestaurantCategoryEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
- * The Class Restaurant.
+ * The Class Restaurant is the restaurant entity mapped to the database.
  */
 @Entity
 @Table(name = "restaurant")
@@ -56,6 +56,7 @@ public class Restaurant {
 	@Column(name = "postal_code")
 	private Integer postalCode;
 	
+	/** The restaurant menus. */
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "restaurant")
 	@JsonIgnore
     private Set<Menu> restaurantMenus = new HashSet<>();

@@ -24,7 +24,7 @@ import com.captaingrub.restaurant.domainmodel.repo.RestaurantRepository;
 import com.captaingrub.restaurant.service.IRestaurantService;
 
 /**
- * The Class RestaurantServiceImpl.
+ * The Class RestaurantServiceImpl is a concrete implementation of {@link IRestaurantService}.
  */
 @Service
 public class RestaurantServiceImpl implements IRestaurantService {
@@ -56,6 +56,7 @@ public class RestaurantServiceImpl implements IRestaurantService {
 	public void addRestaurants(List<RestaurantDTO> newRestaurantDTOs) {
 		List<Restaurant> newRestaurants = new ArrayList<>(newRestaurantDTOs.size());
 		for (RestaurantDTO dto : newRestaurantDTOs) {
+			// creating new Restaurant entities for each of the input DTOs
 			Restaurant restaurant = new Restaurant();
 			BeanUtils.copyProperties(dto, restaurant);
 			newRestaurants.add(restaurant);
@@ -72,8 +73,10 @@ public class RestaurantServiceImpl implements IRestaurantService {
 	public Set<Menu> getMenuByRestaurantId(Long restaurantId, Optional<Long> menuId) {
 		Set<Menu> result = null;
 		if (!menuId.isPresent()) {
+			// find all menus for a restaurant if menu ID is not present
 			result = this.menuRepository.findAllByRestaurantId(restaurantId);
 		} else {
+			// find a specific menu for a restaurant if menu ID is present
 			result = new HashSet<>();
 			result.add(this.menuRepository.findByRestaurantIdAndId(restaurantId, menuId.get()));
 		}
@@ -83,10 +86,11 @@ public class RestaurantServiceImpl implements IRestaurantService {
 	@Override
 	@Transactional
 	public void addMenus(Long restaurantId, List<MenuDTO> newMenuDTOs) {
-		// TODO Future improvement: validate that we have an actual restaurant
+		// Future improvement: validate that we have an actual restaurant based on the ID
 		Restaurant restaurant = this.restaurantRepo.findOne(restaurantId);
 		List<Menu> newMenus = new ArrayList<>(newMenuDTOs.size());
 		for (MenuDTO menuDTO : newMenuDTOs) {
+			// Create new menu entities from each of the input DTOs
 			Menu newMenu = new Menu();
 			BeanUtils.copyProperties(menuDTO, newMenu);
 			newMenu.setRestaurant(restaurant);
@@ -106,8 +110,10 @@ public class RestaurantServiceImpl implements IRestaurantService {
 	public Set<MenuItem> getMenuItem(Long menuId, Optional<Long> menuItemId) {
 		Set<MenuItem> result = null;
 		if (!menuItemId.isPresent()) {
+			// get all menu items for given menu ID if menu item ID is not present
 			result = this.menuItemRepository.findAllByMenuId(menuId);
 		} else {
+			// get a specific menu item for a given menu ID
 			result = new HashSet<>();
 			result.add(this.menuItemRepository.findByMenuIdAndId(menuId, menuItemId.get()));
 		}
@@ -123,10 +129,11 @@ public class RestaurantServiceImpl implements IRestaurantService {
 	@Override
 	@Transactional
 	public void addMenuItems(Long restaurantId, Long menuId, List<MenuItemDTO> newMenuItemDTOs) {
-		// TODO Future improvement: validate that we have an actual menu
+		// Future improvement: validate that we have an actual menu
 		Menu menu = this.menuRepository.findByRestaurantIdAndId(restaurantId, menuId);
 		List<MenuItem> newMenuItems = new ArrayList<>(newMenuItemDTOs.size());
 		for (MenuItemDTO menuItemDTO : newMenuItemDTOs) {
+			// create a new MenuItem entity for each of the input menu items
 			MenuItem newMenuItem = new MenuItem();
 			BeanUtils.copyProperties(menuItemDTO, newMenuItem);
 			newMenuItem.setMenu(menu);

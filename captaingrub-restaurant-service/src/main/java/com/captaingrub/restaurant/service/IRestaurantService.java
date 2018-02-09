@@ -12,7 +12,8 @@ import com.captaingrub.restaurant.domainmodel.entity.MenuItem;
 import com.captaingrub.restaurant.domainmodel.entity.Restaurant;
 
 /**
- * The Interface IRestaurantService.
+ * The Interface IRestaurantService declares the service layer contracts for functionalities associated with
+ * restaurants, menus and menu items.
  */
 public interface IRestaurantService {
 	
@@ -33,21 +34,21 @@ public interface IRestaurantService {
 	Set<Restaurant> getRestaurantByPostalCode(Integer postalCode);
 	
 	/**
-	 * Adds the restaurants.
+	 * Adds new restaurants.
 	 *
 	 * @param newRestaurants the new restaurants
 	 */
 	void addRestaurants(List<RestaurantDTO> newRestaurants);
 
 	/**
-	 * Delete restaurant.
+	 * Deletes a restaurant by its ID.
 	 *
 	 * @param restaurantId the restaurant id
 	 */
 	void deleteRestaurant(Long restaurantId);
 
 	/**
-	 * Gets the menu by restaurant id.
+	 * Gets all menus by restaurant id or a specific menu with an optional menuId.
 	 *
 	 * @param restaurantId the restaurant id
 	 * @param menuId the menu id
@@ -56,7 +57,7 @@ public interface IRestaurantService {
 	Set<Menu> getMenuByRestaurantId(Long restaurantId, Optional<Long> menuId);
 
 	/**
-	 * Gets the menu item.
+	 * Gets all menu items by a menu ID or a specific menu item with an optional menuItemID
 	 *
 	 * @param menuId the menu id
 	 * @param menuItemId the menu item id
@@ -65,7 +66,7 @@ public interface IRestaurantService {
 	Set<MenuItem> getMenuItem(Long menuId, Optional<Long> menuItemId);
 
 	/**
-	 * Adds the menus.
+	 * Adds new menus.
 	 *
 	 * @param restaurantId the restaurant id
 	 * @param newMenus the new menus
@@ -73,7 +74,7 @@ public interface IRestaurantService {
 	void addMenus(Long restaurantId, List<MenuDTO> newMenus);
 
 	/**
-	 * Delete menu.
+	 * Deletes a menu based on the restaurantId and the menuId.
 	 *
 	 * @param restaurantId the restaurant id
 	 * @param menuId the menu id
@@ -81,7 +82,7 @@ public interface IRestaurantService {
 	void deleteMenu(Long restaurantId, Long menuId);
 
 	/**
-	 * Delete menu item.
+	 * Deletes a menu item based on the restaurant ID, menu ID and menu item ID.
 	 *
 	 * @param restaurantId the restaurant id
 	 * @param menuId the menu id
@@ -90,7 +91,7 @@ public interface IRestaurantService {
 	void deleteMenuItem(Long restaurantId, Long menuId, Long menuItemId);
 
 	/**
-	 * Adds the menu items.
+	 * Adds new menu items for a specific restaurant ID and menu ID.
 	 *
 	 * @param restaurantId the restaurant id
 	 * @param menuId the menu id

@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
- * The Class MenuItem.
+ * The Class MenuItem is the menu item entity mapped to the database.
  */
 @Entity
 @Table(name = "menu_item")

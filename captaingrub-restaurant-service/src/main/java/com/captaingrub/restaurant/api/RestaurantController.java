@@ -22,12 +22,13 @@ import com.captaingrub.restaurant.domainmodel.entity.Restaurant;
 import com.captaingrub.restaurant.service.IRestaurantService;
 
 /**
- * The Class RestaurantController.
+ * The Class RestaurantController contains REST end points for Captain Grub, the Online Ordering System,
+ * including those for restaurants, their menus and menu items.
  */
 @RestController
 public class RestaurantController {
 	
-	/** The restaurant service. */
+	/** The restaurant service reference */
 	@Autowired
 	private IRestaurantService restaurantService;
 	
@@ -46,7 +47,7 @@ public class RestaurantController {
 	 * Gets the restaurant by postal code.
 	 *
 	 * @param postalCode the postal code
-	 * @return the restaurant by postal code
+	 * @return the restaurants by postal code
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/restaurant/location/{postalCode}")
 	public ResponseEntity<Set<Restaurant>> getRestaurantByPostalCode(
@@ -55,7 +56,7 @@ public class RestaurantController {
 	}
 	
 	/**
-	 * Adds the restaurants.
+	 * Adds new restaurants.
 	 *
 	 * @param newRestaurants the new restaurants
 	 * @return the response entity
@@ -67,19 +68,20 @@ public class RestaurantController {
 	}
 	
 	/**
-	 * Delete restaurant.
+	 * Deletes restaurant by ID.
 	 *
 	 * @param restaurantId the restaurant id
 	 * @return the response entity
 	 */
 	@RequestMapping(method = RequestMethod.DELETE, value = "/restaurant/{restaurantId}")
-	public ResponseEntity<Void> deleteRestaurant(@PathVariable("restaurantId") final Long restaurantId) {
+	public ResponseEntity<Void> deleteRestaurantById(@PathVariable("restaurantId") final Long restaurantId) {
 		this.restaurantService.deleteRestaurant(restaurantId);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	/**
-	 * Gets the menu by restaurant id.
+	 * Gets the menu by restaurant ID, with an optional menu ID parameter. If the optional parameter is not passed
+	 * the end point returns all the menus for the given restaurant ID.
 	 *
 	 * @param restaurantId the restaurant id
 	 * @param menuId the menu id
@@ -94,7 +96,7 @@ public class RestaurantController {
 	}
 	
 	/**
-	 * Adds the menus.
+	 * Adds new menus for a given restaurant ID.
 	 *
 	 * @param restaurantId the restaurant id
 	 * @param newMenus the new menus
@@ -108,7 +110,7 @@ public class RestaurantController {
 	}
 	
 	/**
-	 * Delete menu.
+	 * Deletes a menu for a given restaurant ID and menu ID.
 	 *
 	 * @param restaurantId the restaurant id
 	 * @param menuId the menu id
@@ -122,11 +124,12 @@ public class RestaurantController {
 	}
 	
 	/**
-	 * Gets the menu item.
+	 * Gets the menu items for a given menu ID. An optional path variable menuItemId, if present returns
+	 * only the specific menu item associated with the ID.
 	 *
 	 * @param menuId the menu id
 	 * @param menuItemId the menu item id
-	 * @return the menu item
+	 * @return the menu item(s)
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = {"/menu/{menuId}/item/{menuItemId}", 
 			"/menu/{menuId}"})
@@ -137,7 +140,7 @@ public class RestaurantController {
 	}
 	
 	/**
-	 * Adds the menu items.
+	 * Adds new menu items for a given restaurant ID and menu ID.
 	 *
 	 * @param restaurantId the restaurant id
 	 * @param menuId the menu id
@@ -153,7 +156,7 @@ public class RestaurantController {
 	}
 	
 	/**
-	 * Delete menu item.
+	 * Deletes the menu item for a given restaurant ID, menu ID and menu item ID.
 	 *
 	 * @param restaurantId the restaurant id
 	 * @param menuId the menu id

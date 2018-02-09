@@ -1,7 +1,7 @@
 package com.captaingrub.restaurant.constants;
 
 /**
- * The Enum RestaurantCategoryEnum.
+ * The Enum RestaurantCategoryEnum encapsulates the different categories of restaurants.
  */
 public enum RestaurantCategoryEnum {
 	
@@ -30,7 +30,7 @@ public enum RestaurantCategoryEnum {
 	}
 	
 	/**
-	 * Gets the response category.
+	 * Gets the user friendly category string.
 	 *
 	 * @return the response category
 	 */

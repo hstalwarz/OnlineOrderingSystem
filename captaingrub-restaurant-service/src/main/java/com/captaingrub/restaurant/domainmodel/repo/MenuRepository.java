@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.captaingrub.restaurant.domainmodel.entity.Menu;
 
 /**
- * The Interface MenuRepository.
+ * The Interface MenuRepository is the JPA repository to work {@link Menu} objects.
  */
 @Repository
 public interface MenuRepository extends CrudRepository<Menu, Long> {

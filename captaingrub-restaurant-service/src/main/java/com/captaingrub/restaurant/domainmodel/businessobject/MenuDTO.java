@@ -1,9 +1,7 @@
 package com.captaingrub.restaurant.domainmodel.businessobject;
 
-import com.captaingrub.restaurant.domainmodel.entity.Restaurant;
-
 /**
- * The Class MenuDTO.
+ * The Class MenuDTO captures the details of a Menu.
  */
 public class MenuDTO {
 	
@@ -12,9 +10,6 @@ public class MenuDTO {
 	
 	/** The description. */
 	private String description;
-	
-	/** The restaurant. */
-	private Restaurant restaurant;
 	
 	/**
 	 * Gets the name.
@@ -50,24 +45,6 @@ public class MenuDTO {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	/**
-	 * Gets the restaurant.
-	 *
-	 * @return the restaurant
-	 */
-	public Restaurant getRestaurant() {
-		return restaurant;
-	}
-
-	/**
-	 * Sets the restaurant.
-	 *
-	 * @param restaurant the new restaurant
-	 */
-	public void setRestaurant(Restaurant restaurant) {
-		this.restaurant = restaurant;
 	}
 
 }

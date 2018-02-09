@@ -16,10 +16,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
- * The Class Menu.
+ * The Class Menu is the restaurant menu entity mapped to the database.
  */
 @Entity
 @Table(name = "menu")
@@ -45,6 +44,7 @@ public class Menu {
 	@JsonIgnore
 	private Restaurant restaurant;
 	
+	/** The menu items. */
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "menu", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Set<MenuItem> menuItems = new HashSet<>();

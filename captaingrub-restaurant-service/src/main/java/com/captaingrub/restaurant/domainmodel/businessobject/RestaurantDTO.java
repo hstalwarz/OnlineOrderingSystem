@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import com.captaingrub.restaurant.constants.RestaurantCategoryEnum;
 
 /**
- * The Class RestaurantDTO.
+ * The Class RestaurantDTO captures the details of a restaurant.
  */
 public class RestaurantDTO {
 	
