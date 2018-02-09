@@ -1,6 +1,6 @@
 # OnlineOrderingSystem
 
-This codebase simulates a REST API, part of a hypothetical online ordering system - CaptainGrub, created as part of a __Zappos__ recruitment challenge with 3 primary entities:
+This is a REST API, part of a hypothetical online ordering system - CaptainGrub, created for a __Zappos__ recruitment challenge with 3 primary entities:
 * Restaurant
 * Menu
 * Menu Item
