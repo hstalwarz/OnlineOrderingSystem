@@ -22,7 +22,7 @@ public interface MenuItemRepository extends CrudRepository<MenuItem, Long> {
 	Set<MenuItem> findAllByMenuId(Long menuId);
 
 	/**
-	 * Find by menu id and id.
+	 * Find by menu id and menu item id.
 	 *
 	 * @param menuId the menu id
 	 * @param id the id
@@ -31,7 +31,7 @@ public interface MenuItemRepository extends CrudRepository<MenuItem, Long> {
 	MenuItem findByMenuIdAndId(Long menuId, Long id);
 
 	/**
-	 * Delete by menu id and id.
+	 * Delete by menu id and menu item id.
 	 *
 	 * @param menuId the menu id
 	 * @param menuItemId the menu item id

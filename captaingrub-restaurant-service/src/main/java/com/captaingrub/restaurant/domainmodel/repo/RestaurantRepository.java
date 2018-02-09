@@ -13,6 +13,12 @@ import com.captaingrub.restaurant.domainmodel.entity.Restaurant;
 @Repository
 public interface RestaurantRepository extends CrudRepository<Restaurant, Long> {
 
+	/**
+	 * Find all restaurants by postal code.
+	 *
+	 * @param postalCode the postal code
+	 * @return the sets the
+	 */
 	Set<Restaurant> findAllByPostalCode(Integer postalCode);
 
 }
